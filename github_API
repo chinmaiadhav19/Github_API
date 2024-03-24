@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "3b8bfe98-dc6d-4a6f-9df5-ce0e57f3918c",
+		"name": "create",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33484787"
+	},
+	"item": [
+		{
+			"name": "create repo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//test for status code\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"//test for status description \r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});\r",
+							"\r",
+							"//response time\r",
+							"pm.test(\"Response time is less than 1000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"//test to fetch value of id \r",
+							"pm.test(\"ID value fetch and updated in repoid variable\",function()\r",
+							"{\r",
+							"    var responseBody = pm.response.json();\r",
+							"    pm.collectionVariables.set(\"RepoId\",responseBody.id)\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let RandomNo= Math.floor(Math.random()*100);\r",
+							"console.log(RandomNo);\r",
+							"pm.collectionVariables.set(\"Repo_name\",\"BatchM6\"+RandomNo);\r",
+							"//console.log(Repo_name);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"{{Repo_name}}\",\r\n    \"description\":\"create API repo\",\r\n    \"private\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/user/repos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"repos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create repo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"create_API_repo\",\r\n    \"description\":\"create API repo\",\r\n    \"private\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/repos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "GitHub.com"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Mar 2024 04:29:47 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5949"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private, max-age=60, s-maxage=60"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Authorization, Cookie, X-GitHub-OTP"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding, Accept, X-Requested-With"
+						},
+						{
+							"key": "ETag",
+							"value": "\"ea9b2261ea1b08dce3861a09fa430aa0ba7e89ecda6e43d4bbdce653ca2bf49b\""
+						},
+						{
+							"key": "X-OAuth-Scopes",
+							"value": "delete_repo, repo"
+						},
+						{
+							"key": "X-Accepted-OAuth-Scopes",
+							"value": "public_repo, repo"
+						},
+						{
+							"key": "github-authentication-token-expiration",
+							"value": "2024-03-23 04:09:17 UTC"
+						},
+						{
+							"key": "Location",
+							"value": "https://api.github.com/repos/chinmaiadhav19/create_API_repo"
+						},
+						{
+							"key": "X-GitHub-Media-Type",
+							"value": "github.v3; format=json"
+						},
+						{
+							"key": "x-github-api-version-selected",
+							"value": "2022-11-28"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "5000"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "4999"
+						},
+						{
+							"key": "X-RateLimit-Reset",
+							"value": "1710566987"
+						},
+						{
+							"key": "X-RateLimit-Used",
+							"value": "1"
+						},
+						{
+							"key": "X-RateLimit-Resource",
+							"value": "core"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubdomains; preload"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "deny"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "origin-when-cross-origin, strict-origin-when-cross-origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'none'"
+						},
+						{
+							"key": "X-GitHub-Request-Id",
+							"value": "C472:173EDB:1F4F5A:2293E3:65F5203A"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 772858831,\n    \"node_id\": \"R_kgDOLhDjzw\",\n    \"name\": \"create_API_repo\",\n    \"full_name\": \"chinmaiadhav19/create_API_repo\",\n    \"private\": false,\n    \"owner\": {\n        \"login\": \"chinmaiadhav19\",\n        \"id\": 127010646,\n        \"node_id\": \"U_kgDOB5IHVg\",\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/127010646?v=4\",\n        \"gravatar_id\": \"\",\n        \"url\": \"https://api.github.com/users/chinmaiadhav19\",\n        \"html_url\": \"https://github.com/chinmaiadhav19\",\n        \"followers_url\": \"https://api.github.com/users/chinmaiadhav19/followers\",\n        \"following_url\": \"https://api.github.com/users/chinmaiadhav19/following{/other_user}\",\n        \"gists_url\": \"https://api.github.com/users/chinmaiadhav19/gists{/gist_id}\",\n        \"starred_url\": \"https://api.github.com/users/chinmaiadhav19/starred{/owner}{/repo}\",\n        \"subscriptions_url\": \"https://api.github.com/users/chinmaiadhav19/subscriptions\",\n        \"organizations_url\": \"https://api.github.com/users/chinmaiadhav19/orgs\",\n        \"repos_url\": \"https://api.github.com/users/chinmaiadhav19/repos\",\n        \"events_url\": \"https://api.github.com/users/chinmaiadhav19/events{/privacy}\",\n        \"received_events_url\": \"https://api.github.com/users/chinmaiadhav19/received_events\",\n        \"type\": \"User\",\n        \"site_admin\": false\n    },\n    \"html_url\": \"https://github.com/chinmaiadhav19/create_API_repo\",\n    \"description\": \"create API repo\",\n    \"fork\": false,\n    \"url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo\",\n    \"forks_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/forks\",\n    \"keys_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/keys{/key_id}\",\n    \"collaborators_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/collaborators{/collaborator}\",\n    \"teams_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/teams\",\n    \"hooks_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/hooks\",\n    \"issue_events_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/issues/events{/number}\",\n    \"events_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/events\",\n    \"assignees_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/assignees{/user}\",\n    \"branches_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/branches{/branch}\",\n    \"tags_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/tags\",\n    \"blobs_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/git/blobs{/sha}\",\n    \"git_tags_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/git/tags{/sha}\",\n    \"git_refs_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/git/refs{/sha}\",\n    \"trees_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/git/trees{/sha}\",\n    \"statuses_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/statuses/{sha}\",\n    \"languages_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/languages\",\n    \"stargazers_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/stargazers\",\n    \"contributors_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/contributors\",\n    \"subscribers_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/subscribers\",\n    \"subscription_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/subscription\",\n    \"commits_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/commits{/sha}\",\n    \"git_commits_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/git/commits{/sha}\",\n    \"comments_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/comments{/number}\",\n    \"issue_comment_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/issues/comments{/number}\",\n    \"contents_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/contents/{+path}\",\n    \"compare_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/compare/{base}...{head}\",\n    \"merges_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/merges\",\n    \"archive_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/{archive_format}{/ref}\",\n    \"downloads_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/downloads\",\n    \"issues_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/issues{/number}\",\n    \"pulls_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/pulls{/number}\",\n    \"milestones_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/milestones{/number}\",\n    \"notifications_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/notifications{?since,all,participating}\",\n    \"labels_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/labels{/name}\",\n    \"releases_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/releases{/id}\",\n    \"deployments_url\": \"https://api.github.com/repos/chinmaiadhav19/create_API_repo/deployments\",\n    \"created_at\": \"2024-03-16T04:29:47Z\",\n    \"updated_at\": \"2024-03-16T04:29:47Z\",\n    \"pushed_at\": \"2024-03-16T04:29:47Z\",\n    \"git_url\": \"git://github.com/chinmaiadhav19/create_API_repo.git\",\n    \"ssh_url\": \"git@github.com:chinmaiadhav19/create_API_repo.git\",\n    \"clone_url\": \"https://github.com/chinmaiadhav19/create_API_repo.git\",\n    \"svn_url\": \"https://github.com/chinmaiadhav19/create_API_repo\",\n    \"homepage\": null,\n    \"size\": 0,\n    \"stargazers_count\": 0,\n    \"watchers_count\": 0,\n    \"language\": null,\n    \"has_issues\": true,\n    \"has_projects\": true,\n    \"has_downloads\": true,\n    \"has_wiki\": true,\n    \"has_pages\": false,\n    \"has_discussions\": false,\n    \"forks_count\": 0,\n    \"mirror_url\": null,\n    \"archived\": false,\n    \"disabled\": false,\n    \"open_issues_count\": 0,\n    \"license\": null,\n    \"allow_forking\": true,\n    \"is_template\": false,\n    \"web_commit_signoff_required\": false,\n    \"topics\": [],\n    \"visibility\": \"public\",\n    \"forks\": 0,\n    \"open_issues\": 0,\n    \"watchers\": 0,\n    \"default_branch\": \"main\",\n    \"permissions\": {\n        \"admin\": true,\n        \"maintain\": true,\n        \"push\": true,\n        \"triage\": true,\n        \"pull\": true\n    },\n    \"allow_squash_merge\": true,\n    \"allow_merge_commit\": true,\n    \"allow_rebase_merge\": true,\n    \"allow_auto_merge\": false,\n    \"delete_branch_on_merge\": false,\n    \"allow_update_branch\": false,\n    \"use_squash_pr_title_as_default\": false,\n    \"squash_merge_commit_message\": \"COMMIT_MESSAGES\",\n    \"squash_merge_commit_title\": \"COMMIT_OR_PR_TITLE\",\n    \"merge_commit_message\": \"PR_TITLE\",\n    \"merge_commit_title\": \"MERGE_MESSAGE\",\n    \"network_count\": 0,\n    \"subscribers_count\": 0\n}"
+				},
+				{
+					"name": "create repo final",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{Repo_name}}\",\r\n    \"description\":\"create API repo\",\r\n    \"private\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/repos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "GitHub.com"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Mar 2024 04:48:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5685"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "private, max-age=60, s-maxage=60"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Authorization, Cookie, X-GitHub-OTP"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding, Accept, X-Requested-With"
+						},
+						{
+							"key": "ETag",
+							"value": "\"7e8b91f9d6d10b2926b3f1c0651bdb253d24c37e007e020e2eecf86e5243b9ae\""
+						},
+						{
+							"key": "X-OAuth-Scopes",
+							"value": "delete_repo, repo"
+						},
+						{
+							"key": "X-Accepted-OAuth-Scopes",
+							"value": "public_repo, repo"
+						},
+						{
+							"key": "github-authentication-token-expiration",
+							"value": "2024-03-23 04:09:17 UTC"
+						},
+						{
+							"key": "Location",
+							"value": "https://api.github.com/repos/chinmaiadhav19/BatchM624"
+						},
+						{
+							"key": "X-GitHub-Media-Type",
+							"value": "github.v3; format=json"
+						},
+						{
+							"key": "x-github-api-version-selected",
+							"value": "2022-11-28"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "5000"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "4997"
+						},
+						{
+							"key": "X-RateLimit-Reset",
+							"value": "1710566987"
+						},
+						{
+							"key": "X-RateLimit-Used",
+							"value": "3"
+						},
+						{
+							"key": "X-RateLimit-Resource",
+							"value": "core"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubdomains; preload"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "deny"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "origin-when-cross-origin, strict-origin-when-cross-origin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'none'"
+						},
+						{
+							"key": "X-GitHub-Request-Id",
+							"value": "EA22:1775C6:212D03:248B80:65F5249D"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 772862888,\n    \"node_id\": \"R_kgDOLhDzqA\",\n    \"name\": \"BatchM624\",\n    \"full_name\": \"chinmaiadhav19/BatchM624\",\n    \"private\": false,\n    \"owner\": {\n        \"login\": \"chinmaiadhav19\",\n        \"id\": 127010646,\n        \"node_id\": \"U_kgDOB5IHVg\",\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/127010646?v=4\",\n        \"gravatar_id\": \"\",\n        \"url\": \"https://api.github.com/users/chinmaiadhav19\",\n        \"html_url\": \"https://github.com/chinmaiadhav19\",\n        \"followers_url\": \"https://api.github.com/users/chinmaiadhav19/followers\",\n        \"following_url\": \"https://api.github.com/users/chinmaiadhav19/following{/other_user}\",\n        \"gists_url\": \"https://api.github.com/users/chinmaiadhav19/gists{/gist_id}\",\n        \"starred_url\": \"https://api.github.com/users/chinmaiadhav19/starred{/owner}{/repo}\",\n        \"subscriptions_url\": \"https://api.github.com/users/chinmaiadhav19/subscriptions\",\n        \"organizations_url\": \"https://api.github.com/users/chinmaiadhav19/orgs\",\n        \"repos_url\": \"https://api.github.com/users/chinmaiadhav19/repos\",\n        \"events_url\": \"https://api.github.com/users/chinmaiadhav19/events{/privacy}\",\n        \"received_events_url\": \"https://api.github.com/users/chinmaiadhav19/received_events\",\n        \"type\": \"User\",\n        \"site_admin\": false\n    },\n    \"html_url\": \"https://github.com/chinmaiadhav19/BatchM624\",\n    \"description\": \"create API repo\",\n    \"fork\": false,\n    \"url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624\",\n    \"forks_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/forks\",\n    \"keys_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/keys{/key_id}\",\n    \"collaborators_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/collaborators{/collaborator}\",\n    \"teams_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/teams\",\n    \"hooks_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/hooks\",\n    \"issue_events_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/issues/events{/number}\",\n    \"events_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/events\",\n    \"assignees_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/assignees{/user}\",\n    \"branches_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/branches{/branch}\",\n    \"tags_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/tags\",\n    \"blobs_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/git/blobs{/sha}\",\n    \"git_tags_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/git/tags{/sha}\",\n    \"git_refs_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/git/refs{/sha}\",\n    \"trees_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/git/trees{/sha}\",\n    \"statuses_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/statuses/{sha}\",\n    \"languages_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/languages\",\n    \"stargazers_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/stargazers\",\n    \"contributors_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/contributors\",\n    \"subscribers_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/subscribers\",\n    \"subscription_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/subscription\",\n    \"commits_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/commits{/sha}\",\n    \"git_commits_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/git/commits{/sha}\",\n    \"comments_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/comments{/number}\",\n    \"issue_comment_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/issues/comments{/number}\",\n    \"contents_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/contents/{+path}\",\n    \"compare_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/compare/{base}...{head}\",\n    \"merges_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/merges\",\n    \"archive_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/{archive_format}{/ref}\",\n    \"downloads_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/downloads\",\n    \"issues_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/issues{/number}\",\n    \"pulls_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/pulls{/number}\",\n    \"milestones_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/milestones{/number}\",\n    \"notifications_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/notifications{?since,all,participating}\",\n    \"labels_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/labels{/name}\",\n    \"releases_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/releases{/id}\",\n    \"deployments_url\": \"https://api.github.com/repos/chinmaiadhav19/BatchM624/deployments\",\n    \"created_at\": \"2024-03-16T04:48:29Z\",\n    \"updated_at\": \"2024-03-16T04:48:29Z\",\n    \"pushed_at\": \"2024-03-16T04:48:29Z\",\n    \"git_url\": \"git://github.com/chinmaiadhav19/BatchM624.git\",\n    \"ssh_url\": \"git@github.com:chinmaiadhav19/BatchM624.git\",\n    \"clone_url\": \"https://github.com/chinmaiadhav19/BatchM624.git\",\n    \"svn_url\": \"https://github.com/chinmaiadhav19/BatchM624\",\n    \"homepage\": null,\n    \"size\": 0,\n    \"stargazers_count\": 0,\n    \"watchers_count\": 0,\n    \"language\": null,\n    \"has_issues\": true,\n    \"has_projects\": true,\n    \"has_downloads\": true,\n    \"has_wiki\": true,\n    \"has_pages\": false,\n    \"has_discussions\": false,\n    \"forks_count\": 0,\n    \"mirror_url\": null,\n    \"archived\": false,\n    \"disabled\": false,\n    \"open_issues_count\": 0,\n    \"license\": null,\n    \"allow_forking\": true,\n    \"is_template\": false,\n    \"web_commit_signoff_required\": false,\n    \"topics\": [],\n    \"visibility\": \"public\",\n    \"forks\": 0,\n    \"open_issues\": 0,\n    \"watchers\": 0,\n    \"default_branch\": \"main\",\n    \"permissions\": {\n        \"admin\": true,\n        \"maintain\": true,\n        \"push\": true,\n        \"triage\": true,\n        \"pull\": true\n    },\n    \"allow_squash_merge\": true,\n    \"allow_merge_commit\": true,\n    \"allow_rebase_merge\": true,\n    \"allow_auto_merge\": false,\n    \"delete_branch_on_merge\": false,\n    \"allow_update_branch\": false,\n    \"use_squash_pr_title_as_default\": false,\n    \"squash_merge_commit_message\": \"COMMIT_MESSAGES\",\n    \"squash_merge_commit_title\": \"COMMIT_OR_PR_TITLE\",\n    \"merge_commit_message\": \"PR_TITLE\",\n    \"merge_commit_title\": \"MERGE_MESSAGE\",\n    \"network_count\": 0,\n    \"subscribers_count\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "get repo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/repos/chinmaiadhav19/{{Repo_name}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"repos",
+						"chinmaiadhav19",
+						"{{Repo_name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update repo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"{{Repo_name}}\",\r\n    \"description\":\"create API repo 1\",\r\n    \"private\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/repos/chinmaiadhav19/{{Repo_name}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"repos",
+						"chinmaiadhav19",
+						"{{Repo_name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete repo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "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",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/repos/chinmaiadhav19/{{Repo_name}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"repos",
+						"chinmaiadhav19",
+						"{{Repo_name}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://api.github.com"
+		},
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "RepoId",
+			"value": ""
+		},
+		{
+			"key": "Repo_name",
+			"value": ""
+		}
+	]
+}
